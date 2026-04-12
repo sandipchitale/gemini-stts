@@ -1,0 +1,5 @@
+{
+  "name": "gemini-stts",
+  "description": "Talk to gemini cli and hear gemini cli talk back.",
+  "version": "1.0.0"
+}

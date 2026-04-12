@@ -1,0 +1,11 @@
+prompt = """
+## Step 1:
+
+!{ node ${extensionPath}/dist/stt.mjs --start-recording {{args}} }
+
+## Step 2: If the above command returned an empty string or exited with a non-zero status, exit the loop. Do not output anything at all.
+
+## Step 3: You must output only the prompt returned by the above command to the output first.
+
+## Step 4: Then submit it to the model as the user-entered prompt.
+"""

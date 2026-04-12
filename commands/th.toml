@@ -1,0 +1,25 @@
+prompt = """
+## Step 1:
+
+!{node ${extensionPath}/dist/stt.mjs --start-recording {{args}} }
+
+## Step 2: If the above command returned an empty string or exited with a non-zero status, exit the loop. Do not output anything at all.
+
+## Step 3: Output the returned prompt to the output as is.
+
+## Step 4: Speak the response
+
+Do not output model response to the output.
+
+Instead, speak your response aloud by piping it to the TTS script using the Bash tool. Use a heredoc for multi-line text:
+
+```
+node ${extensionPath}/dist/tts.mjs --oneshot <<'EOF'
+Your plain text response here.
+EOF
+```
+
+Do not include any Markdown formatting, code blocks, or special characters in the text - just plain readable text.
+
+After that just return to let user enter the next prompt.
+"""
