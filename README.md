@@ -4,7 +4,7 @@ A Gemini CLI extension that adds speech-to-text (STT) and text-to-speech (TTS) c
 
 If you are looking for claude code alternative... [claude-stts](https://github.com/sandipchitale/claude-stts)
 
-![WOrks with both - claude code and gemini cli](screenshots/cc-gc-stts.png)
+![Works with both - claude code and gemini cli](screenshots/cc-gc-stts.png)
 
 ## Features
 
