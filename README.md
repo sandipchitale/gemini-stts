@@ -1,10 +1,10 @@
 # gemini-stts
 
-**IMPORTANT** This will work when this PR is merged: https://github.com/google-gemini/gemini-cli/pull/22681
-
 A Gemini CLI extension that adds speech-to-text (STT) and text-to-speech (TTS) capabilities to the Gemini CLI. Speak your prompts instead of typing them, and hear Gemini CLI's responses read aloud.
 
 If you are looking for claude code alternative... [claude-stts](https://github.com/sandipchitale/claude-stts)
+
+![WOrks with both - claude code and gemini cli](screenshots/cc-gc-stts.png)
 
 ## Features
 
