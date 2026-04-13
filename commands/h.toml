@@ -1,18 +1,13 @@
 prompt = """
-Launch the text-to-speech dialog to speak text aloud.
+## Step 1: Speak the response
 
-If the user provided text arguments, speak that text. Otherwise, speak your most recent response to the user.
+Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response - just plain readable text. Write the response to '/tmp/gemini_cli_response.txt'.
 
 ```
-EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/tts.mjs" --oneshot <<'EOF'
-The text to speak goes here.
-It can span multiple lines.
-EOF
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs" --oneshot
 ```
 
-This opens a Chrome-based dialog that reads the text aloud using the browser's SpeechSynthesis API. The user can stop, replay, or close the dialog.
+## Step 2
 
-Do not include any Markdown formatting, code blocks, or special characters in the text - just plain readable text.
-
-After that just return to let user enter the next prompt.
+**MANDATORY** Return to let user enter the next prompt.
 """

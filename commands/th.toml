@@ -9,17 +9,13 @@ prompt = """
 
 ## Step 4: Speak the response
 
-Do not output model response to the output.
-
-Instead, speak your response aloud by piping it to the TTS script using the Bash tool. Use a heredoc for multi-line text:
+Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response - just plain readable text. Write the response to '/tmp/gemini_cli_response.txt'.
 
 ```
-EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/tts.mjs" --oneshot <<'EOF'
-Your plain text response here.
-EOF
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs" --oneshot
 ```
 
-Do not include any Markdown formatting, code blocks, or special characters in the text - just plain readable text.
+## Step 5
 
-After that just return to let user enter the next prompt.
+**MANDATORY** Return to let user enter the next prompt.
 """
