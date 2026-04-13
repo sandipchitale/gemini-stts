@@ -4,6 +4,8 @@
 
 A Gemini CLI extension that adds speech-to-text (STT) and text-to-speech (TTS) capabilities to the Gemini CLI. Speak your prompts instead of typing them, and hear Gemini CLI's responses read aloud.
 
+If you are looking for claude code alternative... [claude-stts](https://github.com/sandipchitale/claude-stts)
+
 ## Features
 
 - **Speech-to-Text (`/t`)** - Dictate your prompt using your microphone via a Chrome-based UI powered by the Web SpeechRecognition API
