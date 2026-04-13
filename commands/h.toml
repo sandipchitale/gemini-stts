@@ -4,7 +4,7 @@ Launch the text-to-speech dialog to speak text aloud.
 If the user provided text arguments, speak that text. Otherwise, speak your most recent response to the user.
 
 ```
-node ${extensionPath}/dist/tts.mjs --oneshot <<'EOF'
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/tts.mjs" --oneshot <<'EOF'
 The text to speak goes here.
 It can span multiple lines.
 EOF
