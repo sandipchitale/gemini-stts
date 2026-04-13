@@ -45,12 +45,11 @@ The plugin launches a Chrome instance (via [chrome-launcher](https://www.npmjs.c
 
 - **STT flow**: Opens a Chrome window with a textarea where you can type or dictate. Microphone permission is automatically granted via Puppeteer. When you click "Send" or press Enter, the text is printed to stdout, which Gemini CLI captures and processes as your prompt.
 
-~[Speak](screenshots/stt.png)
+![Speak](screenshots/stt.png)
 
 - **TTS flow**: Opens a Chrome window that receives text via Puppeteer's `evaluateOnNewDocument`, then speaks it using `SpeechSynthesisUtterance`. Supports a `--oneshot` flag to automatically close after speaking.
 
-~[Hear](screenshots/tts.png)
-
+![Hear](screenshots/tts.png)
 
 ## Architecture
 
