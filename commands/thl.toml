@@ -1,21 +1,29 @@
 prompt = """
-## Step 1:
+## Step 1: Capture spoken prompt
+
+First iteration only — read the transcription from this pre-exec:
 
 !{EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/stt.mjs" --start-recording {{args}} }
 
-## Step 2: If the above command returned an empty string or exited with a non-zero status, exit the loop. Do not output anything at all.
+On subsequent iterations (when looping back from Step 6), DO NOT rely on the above pre-exec — it only runs once when the slash command is first invoked. Instead, capture the next prompt yourself by calling the Bash tool with:
+
+```
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/stt.mjs" --start-recording
+```
+
+## Step 2: If the captured prompt is an empty string or the command exited non-zero, exit the loop. Do not output anything at all.
 
 ## Step 3: Output the returned prompt to the output as is.
 
-## Step 4: Speak the response
+## Step 4: Write response to file
 
-Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response - just plain readable text. Write the response to '/tmp/gemini_cli_response.txt'.
+Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response — just plain readable text. Just output 'Processing...' and then silently write the response to '/tmp/gemini_cli_response.txt'. Do not combine this step it with the next Step 5. You must finish this step before moving on to the next Step 5.
+
+## Step 5: Speak the response via the Bash tool
 
 ```
-EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs" --oneshot
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs ; rm -f cat /tmp/gemini_cli_response.txt" --oneshot
 ```
 
-## Step 5:
-
-**MANDATORY** Go must back to Step 1 above.
+## Step 6: **MANDATORY** Go back to Step 1 above and re-capture via the Bash tool invocation shown there. Keep looping until Step 2 exits.
 """

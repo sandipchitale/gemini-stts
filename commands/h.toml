@@ -1,13 +1,13 @@
 prompt = """
-## Step 1: Speak the response
+## Step 1: Write response to file
 
-Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response - just plain readable text. Write the response to '/tmp/gemini_cli_response.txt'.
-
-```
-EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs" --oneshot
-```
+Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response - just plain readable text. Just output 'Processing...' and then silently write the response to '/tmp/gemini_cli_response.txt'. Do not combine this step it with the next Step 2. You must finish this step before moving on to the next Step 2. Be silent about writing to the file.
 
 ## Step 2
 
-**MANDATORY** Return to let user enter the next prompt.
+```
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs ; rm -f cat /tmp/gemini_cli_response.txt" --oneshot
+```
+
+## Step 3: Now just output 'Done. and exit the /h command.
 """
