@@ -1,7 +1,7 @@
 prompt = """
 ## Step 1:
 
-!{ EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/stt.mjs" --start-recording {{args}} }
+!{EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/stt.mjs" --start-recording {{args}} }
 
 ## Step 2: If the above command returned an empty string or exited with a non-zero status, exit the loop. Do not output anything at all.
 

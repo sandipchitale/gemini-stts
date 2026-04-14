@@ -3,7 +3,7 @@ prompt = """
 
 First iteration only — read the transcription from this pre-exec:
 
-!{ EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/stt.mjs" --start-recording {{args}} }
+!{EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/stt.mjs" --start-recording {{args}} }
 
 On subsequent iterations (when looping back from Step 5), DO NOT rely on the above pre-exec — it only runs once when the slash command is first invoked. Instead, capture the next prompt yourself by calling the Bash tool with:
 
