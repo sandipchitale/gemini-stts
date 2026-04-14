@@ -6,7 +6,7 @@ Do not output model response to the output. Do not include any Markdown formatti
 ## Step 2
 
 ```
-EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs ; rm -f cat /tmp/gemini_cli_response.txt" --oneshot
+EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && cat /tmp/gemini_cli_response.txt | node "$EXT/dist/tts.mjs --oneshot ; rm -f /tmp/gemini_cli_response.txt"
 ```
 
 ## Step 3: Now just output 'Done. and exit the /h command.
