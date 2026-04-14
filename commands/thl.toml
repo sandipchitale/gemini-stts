@@ -19,7 +19,8 @@ EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d
 
 Do not output model response to the output. Do not include any Markdown formatting, code blocks, or special characters in the response — just plain readable text. Just output 'Processing...' and then silently write the response to '/tmp/gemini_cli_response.txt'. Do not combine this step it with the next Step 5. You must finish this step before moving on to the next Step 5.
 
-## Step 5: Speak the response via the Bash tool
+## Step 5: Speak the response via the Bash tool. Only run the command specified below. Do not change it in any way.
+
 
 ```
 EXT=$(node -e "const os=require('os'),fs=require('fs'),p=require('path');const d=p.join(os.homedir(),'.gemini/extensions/gemini-stts');const m=JSON.parse(fs.readFileSync(p.join(d,'.gemini-extension-install.json'),'utf8'));console.log(m.type==='link'?m.source:d)") && node "$EXT/dist/tts.mjs" --oneshot < /tmp/gemini_cli_response.txt ; rm -f /tmp/gemini_cli_response.txt
